@@ -12,7 +12,12 @@ def is_prime(n: int) -> bool:
     >>> is_prime(8)
     False
     """
-    # PUT YOUR CODE HERE
+    for i in range(2, int(n**0.5)+1):
+        if n%i == 0:
+            return False
+    return True
+            
+                   
     pass
 
 
@@ -24,7 +29,7 @@ def gcd(a: int, b: int) -> int:
     >>> gcd(3, 7)
     1
     """
-    # PUT YOUR CODE HERE
+    return a if b == 0 else gcd(b, a%b)
     pass
 
 
@@ -35,7 +40,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
+    
     pass
 
 
@@ -101,3 +106,5 @@ if __name__ == "__main__":
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
     print(decrypt(public, encrypted_msg))
+
+
