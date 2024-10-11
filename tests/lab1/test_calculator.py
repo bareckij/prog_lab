@@ -1,5 +1,5 @@
 import unittest
-from src.lab1.calculator import calc
+from src.lab1.calculator import _calccalc
 class CalculatorTestCase(unittest.TestCase):
     def test_add(self):
         self.assertEqual(calc.add(self, 2, 3 ), 5.0)
