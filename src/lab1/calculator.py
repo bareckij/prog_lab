@@ -53,6 +53,7 @@ def main():
                 print(calculator.mltpl(first_number, second_number))
             case "/":
                 print(calculator.div(first_number, second_number))
+            case _: print("Please pick operation provided")
 
 
 if __name__ == "__main__":
