@@ -14,7 +14,7 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     for char in plaintext:
         if char.isalpha():
             is_upper = char.isupper()
-            char = chr((ord(char) - ord('A' if is_upper else 'a') + shift) % 26 + ord('A' if is_upper else 'a'))
+            char = chr((ord(char) - ord("A" if is_upper else "a") + shift) % 26 + ord("A" if is_upper else "a"))
         ciphertext += char
     return ciphertext
 
@@ -35,10 +35,11 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     for char in ciphertext:
         if char.isalpha():
             is_upper = char.isupper()
-            char = chr((ord(char) - ord('A' if is_upper else 'a') - shift) % 26 + ord('A' if is_upper else 'a'))
+            char = chr((ord(char) - ord("A" if is_upper else "a") - shift) % 26 + ord("A" if is_upper else "a"))
         plaintext += char
     return plaintext
     # PUT YOUR CODE HERE
+
 
 print(encrypt_caesar("PyThon3.6"))
 print(encrypt_caesar("pYthOOON))", 7))
