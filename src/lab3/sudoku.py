@@ -1,6 +1,9 @@
+import multiprocessing
+import threading
+import time
 import pathlib
 import typing as tp
-
+import random
 T = tp.TypeVar("T")
 
 def read_sudoku(path: tp.Union[str, pathlib.Path]) -> tp.List[tp.List[str]]:
@@ -9,12 +12,10 @@ def read_sudoku(path: tp.Union[str, pathlib.Path]) -> tp.List[tp.List[str]]:
         puzzle = f.read()
     return create_grid(puzzle)
 
-
 def create_grid(puzzle: str) -> tp.List[tp.List[str]]:
     digits = [c for c in puzzle if c in "123456789."]
     grid = group(digits, 9)
     return grid
-
 
 def display(grid: tp.List[tp.List[str]]) -> None:
     width = 2
@@ -28,7 +29,6 @@ def display(grid: tp.List[tp.List[str]]) -> None:
         if str(row) in "25":
             print(line)
     print()
-
 
 def group(values: tp.List[T], n: int) -> tp.List[tp.List[T]]:
     result = []
@@ -65,26 +65,40 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
     """
     empty_pos = find_empty_positions(grid)
     if not empty_pos:
-        return grid  # Solved
+        return grid  
 
     row, col = empty_pos[0]
     for value in find_possible_values(grid, (row, col)):
         grid[row][col] = value
         if solve(grid):
             return grid
-        grid[row][col] = '.'  # Undo the move
+        grid[row][col] = '.'  
 
-    return None  # Trigger backtracking
+    return None  
 
 
-grid = read_sudoku('src/lab3/puzzle1.txt')
-solve(grid)
-print(solve(grid))
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """ Если решение solution верно, то вернуть True, в противном случае False """
     # TODO: Add doctests with bad puzzles
-    pass
+    for i in range(9):
+        row = set(solution[i])
+        col = set([row[i] for row in solution])
+        if len(row) != 9 or len(col) != 9:
+            return False
 
+    # Check if each 3x3 block contains all digits from 1 to 9 without duplicates
+    for i in range(0, 9, 3):
+        for j in range(0, 9, 3):
+            block = set()
+        for x in range(i, i + 3):
+            for y in range(j, j + 3):
+                block.add(solution[x][y])
+        if len(block) != 9:
+            return False
+
+    return True
+
+print(display(solve(create_grid('53..7....6..195....98....6.8...6...34..8.3..17...2...6.6....28....419..5....8..79'))))
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     """Генерация судоку заполненного на N элементов
@@ -107,7 +121,18 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     >>> check_solution(solution)
     True
     """
-    pass
+    grid = [['.' for x in range(9)] for y in range(9)]
+    while not check_solution(grid):
+        solve(grid)
+
+    count = 0
+    while count < 81 - min(N, 81):
+        row, col = random.randint(0,8), random.randint(0,8)
+        if grid[row][col] != ".":
+            grid[row][col] = "."
+            count += 1
+
+    return grid
 
 
 if __name__ == "__main__":
