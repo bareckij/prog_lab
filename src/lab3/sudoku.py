@@ -96,9 +96,17 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
             count += 1
 
     return grid
-
+def run_solve(file):
+    grid = read_sudoku(file)
+    start = time.time()
+    solve(grid)
+    end = time.time()
+    print(f'{file}: {end-start}')
 if __name__ == "__main__":
     for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
+        p = multiprocessing.Process(target=run_solve, args=(fname,))
+        p.start()        
+        '''
         grid = read_sudoku(fname)
         display(grid)
         solution = solve(grid)
@@ -106,3 +114,4 @@ if __name__ == "__main__":
             print(f"Puzzle {fname} can't be solved")
         else:
             display(solution)
+        '''
