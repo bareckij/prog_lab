@@ -191,7 +191,7 @@ def run_solve(file):
 if __name__ == "__main__":
     for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
         p = multiprocessing.Process(target=run_solve, args=(fname,))
-        p.start()        
+        p.start()
         '''
         grid = read_sudoku(fname)
         display(grid)
