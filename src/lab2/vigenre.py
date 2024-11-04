@@ -12,7 +12,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     # PUT YOUR CODE HERE
     return ciphertext
 
-
+print('test')
 def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     """
     Decrypts a ciphertext using a Vigenere cipher.
