@@ -6,7 +6,7 @@ import pathlib
 import typing as tp
 import random
 T = tp.TypeVar("T")
-
+print('test')
 def read_sudoku(path: tp.Union[str, pathlib.Path]) -> tp.List[tp.List[str]]:
     path = pathlib.Path(path)
     with path.open() as f:
