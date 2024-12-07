@@ -37,7 +37,6 @@ class TestSurvey(unittest.TestCase):
         self.survey.add_respondent('Иванов Иван Иванович', 30)
         self.survey.add_respondent('Иванов Иван Иванович', 30)
         
-        # Убедимся, что респондент не добавлен дважды
         self.assertEqual(len(self.survey.respondents), 2)
 
     def test_group_order(self):

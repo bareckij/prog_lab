@@ -10,7 +10,6 @@ from lab3.task1.task1 import Recommender, Person, Movie  # Импорт клас
 class TestMovieRecommendationSystem(unittest.TestCase):
     def setUp(self):
         """Этот метод вызывается перед каждым тестом для подготовки данных"""
-        # Создаем примерные данные для фильмов и истории пользователей
         self.movies_data = """1,Movie A
 2,Movie B
 3,Movie C
@@ -21,19 +20,16 @@ class TestMovieRecommendationSystem(unittest.TestCase):
 2,2,3,4
 3,1,3,5"""
         
-        # Сохраняем данные во временные файлы
         with open('test_movies.txt', 'w', encoding='utf-8') as f:
             f.write(self.movies_data)
         
         with open('test_history.txt', 'w', encoding='utf-8') as f:
             f.write(self.history_data)
 
-        # Инициализируем систему рекомендаций
         self.recommender = Recommender('test_movies.txt', 'test_history.txt')
 
     def tearDown(self):
         """Этот метод вызывается после каждого теста для очистки данных"""
-        # Удаляем временные файлы после тестов
         import os
         os.remove('test_movies.txt')
         os.remove('test_history.txt')
