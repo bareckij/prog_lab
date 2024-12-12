@@ -2,7 +2,6 @@ import unittest
 import sys
 import os
 
-# Добавляем путь к директории src в sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
 
 from lab3.task1.task1 import Recommender, Person, Movie  # Импорт классов
