@@ -6,13 +6,11 @@ from src.secsem.lab1.task5 import first_function, second_function, main
 
 class TestAsyncFunctions(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
-        # Перехватываем stdout для проверки вывода
         self.held_output = StringIO()
         self.original_stdout = sys.stdout
         sys.stdout = self.held_output
 
     def tearDown(self):
-        # Восстанавливаем stdout
         sys.stdout = self.original_stdout
         self.held_output.close()
 
@@ -44,7 +42,6 @@ class TestAsyncFunctions(unittest.IsolatedAsyncioTestCase):
         output = self.held_output.getvalue().strip().split('\n')
         self.assertEqual(len(output), 7)
         
-        # Проверяем порядок вызовов (первые два могут быть в любом порядке)
         self.assertIn("Функция 1 - первый print", output[:2])
         self.assertIn("Функция 2 - первый print", output[:2])
         

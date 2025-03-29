@@ -6,13 +6,11 @@ from src.secsem.lab1.task1 import logger, add, greet
 
 class TestLoggerDecorator(unittest.TestCase):
     def setUp(self):
-        # Перехватываем stdout для проверки вывода
         self.held_output = StringIO()
         self.original_stdout = sys.stdout
         sys.stdout = self.held_output
 
     def tearDown(self):
-        # Восстанавливаем stdout
         sys.stdout = self.original_stdout
 
     def test_add_function_works_correctly(self):

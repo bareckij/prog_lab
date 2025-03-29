@@ -7,7 +7,6 @@ from src.secsem.lab1.task3 import logger
 
 class TestLoggerDecorator(unittest.TestCase):
     def setUp(self):
-        # Перехватываем stdout для проверки вывода
         self.held_output = StringIO()
         self.original_stdout = sys.stdout
         sys.stdout = self.held_output
@@ -26,10 +25,8 @@ class TestLoggerDecorator(unittest.TestCase):
         obj = TestClass()
         result = obj.test_method(2, 3)
         
-        # Проверяем результат работы метода
         self.assertEqual(result, 5)
         
-        # Проверяем вывод логов
         output = self.held_output.getvalue()
         self.assertIn("Имя класса TestClass", output)
         self.assertIn("Имя метода test_method", output)
@@ -47,10 +44,8 @@ class TestLoggerDecorator(unittest.TestCase):
         obj = TestClass()
         result = str(obj)
         
-        # Проверяем результат работы метода
         self.assertEqual(result, "TestClass instance")
         
-        # Проверяем что магический метод был залогирован
         output = self.held_output.getvalue()
         self.assertIn("Имя метода __str__", output)
 
@@ -64,10 +59,8 @@ class TestLoggerDecorator(unittest.TestCase):
         obj = TestClass()
         result = str(obj)
         
-        # Проверяем результат работы метода
         self.assertEqual(result, "TestClass instance")
         
-        # Проверяем что магический метод не был залогирован
         output = self.held_output.getvalue()
         self.assertEqual(output, "")
 
@@ -80,10 +73,8 @@ class TestLoggerDecorator(unittest.TestCase):
 
         obj = TestClass(10)
         
-        # Проверяем что атрибут установлен
         self.assertEqual(obj.value, 10)
         
-        # Проверяем что __init__ был залогирован
         output = self.held_output.getvalue()
         self.assertIn("Имя метода __init__", output)
         self.assertIn("Аргументы.(10,)", output)
@@ -96,12 +87,10 @@ class TestLoggerDecorator(unittest.TestCase):
                 time.sleep(seconds)
                 return "done"
 
-        # Используем mock для time.sleep чтобы ускорить тест
         with patch('time.sleep'):
             obj = TestClass()
             obj.sleep_method(0.1)
         
-        # Проверяем что время было измерено и выведено
         output = self.held_output.getvalue()
         self.assertIn("Время выполнения", output)
         
@@ -119,7 +108,6 @@ class TestLoggerDecorator(unittest.TestCase):
         obj.method1()
         obj.method2()
         
-        # Проверяем что оба метода были залогированы
         output = self.held_output.getvalue()
         self.assertIn("Имя метода method1", output)
         self.assertIn("Имя метода method2", output)

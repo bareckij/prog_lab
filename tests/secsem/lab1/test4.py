@@ -5,13 +5,11 @@ from src.secsem.lab1.task4 import call_limiter
 
 class TestCallLimiterDecorator(unittest.TestCase):
     def setUp(self):
-        # Перехватываем stdout для проверки вывода
         self.held_output = StringIO()
         self.original_stdout = sys.stdout
         sys.stdout = self.held_output
 
     def tearDown(self):
-        # Восстанавливаем stdout
         sys.stdout = self.original_stdout
         self.held_output.close()
 
@@ -73,8 +71,7 @@ class TestCallLimiterDecorator(unittest.TestCase):
         
         obj = TestClass()
         obj._private_method()
-        obj._private_method()  # Не должно вызывать ошибку
-        
+        obj._private_method()  
         obj.public_method()
         with self.assertRaises(RuntimeError):
             obj.public_method()
