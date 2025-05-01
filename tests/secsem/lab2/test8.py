@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import patch, MagicMock
-import threading
 import src.secsem.lab2.task8 as task8
 
 class TestSafeIncrementCounter(unittest.TestCase):

@@ -2,8 +2,6 @@ import os
 import sys
 import psutil
 import platform
-import subprocess
-from typing import Dict, List, Optional
 
 def clear_screen() -> None:
     """Очистка экрана консоли"""
