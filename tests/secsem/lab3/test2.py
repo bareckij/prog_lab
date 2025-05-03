@@ -13,7 +13,6 @@ class TestDirectoryOperations(unittest.TestCase):
         self.original_dir = os.getcwd()
         os.chdir(self.test_dir)
         
-        # Создаем исходный файл как в основном скрипте
         self.original_file = 'example_file.txt'
         with open(self.original_file, 'w') as f:
             f.write("Пример содержимого файла\n")
@@ -49,31 +48,26 @@ class TestDirectoryOperations(unittest.TestCase):
 
     def test_directory_operations(self):
         """Тест операций с директориями."""
-        # Создаем пустую директорию и удаляем
         empty_dir = 'empty_dir'
         os.makedirs(empty_dir)
         self.assertTrue(os.path.exists(empty_dir))
         os.rmdir(empty_dir)
         self.assertFalse(os.path.exists(empty_dir))
         
-        # Создаем вложенные директории
         nested_dir = os.path.join('deep', 'nested', 'dir')
         os.makedirs(nested_dir)
         self.assertTrue(os.path.exists(nested_dir))
 
     def test_directory_listing(self):
         """Тест вывода содержимого директорий."""
-        # Создаем тестовые файлы и директории
         os.makedirs('test_dir')
         with open(os.path.join('test_dir', 'test_file.txt'), 'w') as f:
             f.write("Тестовый файл\n")
         
-        # Проверяем содержимое основной директории
         items = os.listdir('.')
         self.assertIn('test_dir', items)
         self.assertIn(self.original_file, items)
         
-        # Проверяем содержимое вложенной директории
         os.chdir('test_dir')
         items = os.listdir('.')
         self.assertIn('test_file.txt', items)
@@ -81,14 +75,12 @@ class TestDirectoryOperations(unittest.TestCase):
 
     def test_directory_walk(self):
         """Тест рекурсивного обхода директорий."""
-        # Создаем тестовую структуру
         os.makedirs(os.path.join('parent', 'child'))
         with open(os.path.join('parent', 'file1.txt'), 'w') as f:
             f.write("Файл 1\n")
         with open(os.path.join('parent', 'child', 'file2.txt'), 'w') as f:
             f.write("Файл 2\n")
         
-        # Собираем информацию об обходе
         walk_data = []
         for root, dirs, files in os.walk('.'):
             walk_data.append((root, sorted(dirs), sorted(files)))
