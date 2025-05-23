@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from models import User, Book, Booking
+from src.secsem.lab4.models import User, Book, Booking
 from datetime import date
-from db import SessionLocal
+from src.secsem.lab4.db import SessionLocal
 
 def add_user(db: Session, name: str, email: str):
     user = User(name=name, email=email)
