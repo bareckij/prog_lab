@@ -12,7 +12,7 @@ def main():
     else:
         print(f"Файл {original_file} не найден, создаем новый")
         with open(original_file, 'w') as f:
-            f.write("Пример содержимого файла\n")
+            f.write("Файл\n")
         shutil.copy2(original_file, copied_file)
 
     # 2) Переименует файл. Создайте несколько вложенных директорий и переместите копию файла в одну из них
@@ -33,7 +33,7 @@ def main():
     
     new_location = os.path.join('src', 'secsem','lab3','dir1', 'moved_renamed_file.txt')
     os.rename(new_file, new_location)
-    print(f"Файл создан и перемещен и переименован: {new_location}")
+    print(f"Файл создан и перемещен, и переименован: {new_location}")
 
     # 4) Программно создайте ещё несколько файлов. Выведите все файлы и директории, лежащие в папке, в которой запущен скрипт. Переместитесь во вложенную директорию в которую переместили файл. Выведите все, что находится в этой директории
     for i in range(1, 4):
@@ -67,7 +67,7 @@ def main():
     for i in range(1, 3):
         file_path = os.path.join(few_other, f'deep_file_{i}.txt')
         with open(file_path, 'w') as f:
-            f.write(f"Файл в глубокой директории {i}\n")
+            f.write(f"Файл в директории {i}\n")
     print(f"Созданы вложенные директории и файлы в {few_other}")
 
     # 6) Обойдите текущую директорию и выведите: путь до каждой папки, список файлов в каждой папке.

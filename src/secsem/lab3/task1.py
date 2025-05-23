@@ -19,8 +19,7 @@ if os.path.exists(file_name):
 else:
     exit(1)
 
-print(f"Текущий пользователь: {os.getenv('USER', 'unknown')}")
-
+print(f"Текущий пользователь: {os.getenv('USER')}")
 print(f"Права доступа к файлу: {oct(file_stats.st_mode)[-3:]}")
 try:
     os.chmod(file_name, 0o777)
