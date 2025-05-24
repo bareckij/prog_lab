@@ -3,7 +3,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from datetime import date
 
-# Базовый класс для моделей
 Base = declarative_base()
 
 class User(Base):
@@ -13,7 +12,6 @@ class User(Base):
     name = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
     
-    # Связь один-ко-многим с бронированиями
     bookings = relationship("Booking", back_populates="user")
 
 class Book(Base):
@@ -24,7 +22,6 @@ class Book(Base):
     author = Column(String, nullable=False)
     copies_available = Column(Integer)
     
-    # Связь один-ко-многим с бронированиями
     bookings = relationship("Booking", back_populates="book")
 
 class Booking(Base):
@@ -35,6 +32,5 @@ class Booking(Base):
     book_id = Column(Integer, ForeignKey('books.id'))
     booking_date = Column(Date, default=date.today())
     
-    # Связи многие-к-одному
     user = relationship("User", back_populates="bookings")
     book = relationship("Book", back_populates="bookings")

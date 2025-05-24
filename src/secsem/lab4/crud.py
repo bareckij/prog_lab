@@ -18,16 +18,13 @@ def add_book(db: Session, title: str, author: str, copies_available: int):
     return book
 
 def create_booking(db: Session, user_id: int, book_id: int):
-    # Проверяем доступность книги
     book = db.query(Book).filter(Book.id == book_id).first()
     if not book or book.copies_available <= 0:
         raise ValueError("Книга недоступна для бронирования")
     
-    # Создаем бронирование
     booking = Booking(user_id=user_id, book_id=book_id, booking_date=date.today())
     db.add(booking)
     
-    # Уменьшаем количество доступных экземпляров
     book.copies_available -= 1
     
     db.commit()
@@ -39,7 +36,6 @@ def delete_booking(db: Session, booking_id: int):
     if not booking:
         raise ValueError("Бронирование не найдено")
     
-    # Увеличиваем количество доступных экземпляров
     book = db.query(Book).filter(Book.id == booking.book_id).first()
     if book:
         book.copies_available += 1
